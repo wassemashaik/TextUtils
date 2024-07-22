@@ -44,7 +44,7 @@ export default function TextForm(props) {
   }
   return (
     <>
-    <div className='container' style={{color: props.mode === 'light'? 'black': 'white'}}>
+    <div className='container m-3' style={{color: props.mode === 'light'? 'black': 'white'}}>
       <h1>{props.heading}</h1>
         <div className="mb-3">
         <label htmlFor="myBox" className="form-label" ></label>
@@ -57,20 +57,20 @@ export default function TextForm(props) {
           rows="9" 
           onChange={onChangeText}>
         </textarea>
-        <button className="btn btn-primary mx-2 mt-2" onClick={onUpClick} >UPPERCASE</button>
-        <button className="btn btn-primary mx-2 mt-2" onClick={onLowClick} >lowercase</button>
-        <button className="btn btn-dark mx-2 mt-2" onClick={onInverseClick}>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 mt-2" onClick={onUpClick} >UPPERCASE</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 mt-2" onClick={onLowClick} >lowercase</button>
+        <button disabled={text.length===0} className="btn btn-dark mx-2 mt-2" onClick={onInverseClick}>
           Inverse
         </button>
-        <button className="btn btn-success mx-2 mt-2" onClick={onRandomChange}>color</button>
-        <button className="btn btn-danger mx-2 mt-2" onClick={onClearText}>clear Text</button>
+        <button disabled={text.length===0} className="btn btn-success mx-2 mt-2" onClick={onRandomChange}>color</button>
+        <button disabled={text.length===0} className="btn btn-danger mx-2 mt-2" onClick={onClearText}>clear Text</button>
         </div>
     </div>
     <div className="container my-3" style={{color: props.mode === 'light'? 'black': 'white'}}>
       <h1>Your Text Summary</h1>
       <p>{wordCount(text)} words</p>
       <p>{text.length} characters</p>
-      <p>{0.008 * text.split(' ').length} Minutes to read the text</p>
+      <p>{0.008 * text.split(' ').filter((element)=> {return element.length !==0}).length} Minutes to read the text</p>
       <h2>Preview</h2>
       <p style={{ color:textColor}}>{text.length >0 ? text: 'Enter your text above to see the preview here'}</p>
     </div>
